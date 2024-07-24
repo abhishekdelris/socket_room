@@ -3,7 +3,7 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const formatMessage = require("./src/utils/messages");
-const db = require('./src/config/db.js');
+// const db = require('./src/config/db.js');
 require("dotenv").config();
 const {
   userJoin, 
