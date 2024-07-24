@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
     console.log(socket.join(user.room));
 
     // Welcome current user
-    socket.emit("joinRoomSuccess", formatMessage(botName, "Welcome to join Room successfully"));
+    socket.emit("joinRoomSuccess", formatMessage(user.room, "Welcome to join Room successfully"));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -105,7 +105,7 @@ io.on("connection", (socket) => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit("message", formatMessage(user.username, msg));
-    io.to(user.room).emit("joinRoomSuccess", formatMessage(botName, "Welcome to join Room successfully"));
+    io.to(user.room).emit("errorOccurred", formatMessage(botName, "room can't created !!"));
   });
 
   // Runs when client disconnects
