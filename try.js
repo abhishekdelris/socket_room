@@ -27,8 +27,8 @@ const bet_price = bet.map(result => {
 
 // Run when client connects
 io.on("connection", (socket) => {
-  console.log("user connected", socket);
-  console.log(io.of("/").adapter);
+  // console.log("user connected", socket);
+  // console.log(io.of("/").adapter);
   socket.on("joinRoom", ({ tableAmmount, userId, playerName }) => {    //user_id, room-id , room mack user 4 playername 
     //tableAmmount userId playerName 
     // const user = userJoin(socket.id, username, room); //table -.500
@@ -59,23 +59,24 @@ io.on("connection", (socket) => {
     //     console.log("select any price for bet");
     //     break;
     // }
-    console.log(tableAmmount, userId, playerName);
+    console.log("this is a value", tableAmmount, userId, playerName);
 
     const room = `room-${tableAmmount}`; // Create a unique room name based on table amount
     const username = playerName;
+    console.log("username",username);
 
     const roomUsers = getRoomUsers(room);
-
+    console.log('roomUser');
     if (roomUsers.length >= 4) {
       socket.emit("message", formatMessage(botName, "Room is full. Please choose another room."));
       return;
     }
 
     const user = userJoin(socket.id, username, room); 
-
-    socket.join(user.room);
+     console.log("user", user);
+    // socket.join(user.room);
    
-
+    console.log(socket.join(user.room));
 
     // Welcome current user
     socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
