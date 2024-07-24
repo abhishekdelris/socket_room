@@ -27,6 +27,7 @@ const bet_price = bet.map(result => {
 
 // Run when client connects
 io.on("connection", (socket) => {
+  console.log("user connected", socket);
   console.log(io.of("/").adapter);
   socket.on("joinRoom", ({ tableAmmount, userId, playerName }) => {    //user_id, room-id , room mack user 4 playername 
     //tableAmmount userId playerName 
