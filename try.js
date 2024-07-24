@@ -29,7 +29,7 @@ const bet_price = bet.map(result => {
 io.on("connection", (socket) => {
   // console.log("user connected", socket);
   // console.log(io.of("/").adapter);
-  socket.on("joinRoom", ({ tableAmmount, userId, playerName }) => {    //user_id, room-id , room mack user 4 playername 
+  socket.on("joinRoom", ({ tableAmount, userId, playerName }) => {    //user_id, room-id , room mack user 4 playername 
     //tableAmmount userId playerName 
     // const user = userJoin(socket.id, username, room); //table -.500
     // database --->  user player room (table) ---> user one to one player , player one to many room ---> room max 4 player or min 2 player tabhi room game start  
@@ -59,9 +59,9 @@ io.on("connection", (socket) => {
     //     console.log("select any price for bet");
     //     break;
     // }
-    console.log("this is a value", tableAmmount, userId, playerName);
+    console.log("this is a value", tableAmount, userId, playerName);
 
-    const room = `room-${tableAmmount}`; // Create a unique room name based on table amount
+    const room = `room-${tableAmount}`; // Create a unique room name based on table amount
     const username = playerName;
     console.log("username",username);
 
