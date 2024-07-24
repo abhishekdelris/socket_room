@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
     //     console.log("select any price for bet");
     //     break;
     // }
-
+    console.log(tableAmmount, userId, playerName);
 
     const room = `room-${tableAmmount}`; // Create a unique room name based on table amount
     const username = playerName;
