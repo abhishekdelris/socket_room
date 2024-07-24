@@ -19,11 +19,15 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-const botName = "ChatCord Bot";
+const botName = "Playing game create room";
 const bet = [20, 50, 100, 200, 500, 1000];
 const bet_price = bet.map(result => {
   result.data;
 })
+
+let arr=[]  
+let playingArray=[]  
+
 
 // Run when client connects
 io.on("connection", (socket) => {
@@ -66,9 +70,9 @@ io.on("connection", (socket) => {
     console.log("username",username);
 
     const roomUsers = getRoomUsers(room);
-    console.log('roomUser');
+    console.log('roomUser' ,room);
     if (roomUsers.length >= 4) {
-      socket.emit("message", formatMessage(botName, "Room is full. Please choose another room."));
+      socket.emit("errorOccurred", formatMessage(botName, "Room is full. Please choose another room."));
       return;
     }
 
@@ -79,7 +83,7 @@ io.on("connection", (socket) => {
     console.log(socket.join(user.room));
 
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
+    socket.emit("joinRoomSuccess", formatMessage(botName, "Welcome to join Room successfully"));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -94,13 +98,14 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getRoomUsers(user.room),
     });
-  });
+  }); 
 
   // Listen for chatMessage
   socket.on("chatMessage", (msg) => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit("message", formatMessage(user.username, msg));
+    io.to(user.room).emit("joinRoomSuccess", formatMessage(botName, "Welcome to join Room successfully"));
   });
 
   // Runs when client disconnects
